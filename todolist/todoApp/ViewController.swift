@@ -16,12 +16,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
-        tasks.append(Task(name2: "Test object"))
-        tasks2.append(Task(name2: "Test  "))
-        tasks.append(Task(name2: "Test object"))
-        tasks2.append(Task(name2: "Test  "))
-        tasks.append(Task(name2: "Test object"))
-        tasks2.append(Task(name2: "Test  "))
+       
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -61,9 +56,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }else{
             cell.taskNameLabel.text = tasks2[indexPath.row].name
             if tasks2[indexPath.row].checked {
-                cell.checkBox.setBackgroundImage(UIImage(named: "check"), for: UIControl.State.normal)
-            } else {
                 cell.checkBox.setBackgroundImage(UIImage(named: "checkbox"), for: UIControl.State.normal)
+            } else {
+                cell.checkBox.setBackgroundImage(UIImage(named: "check"), for: UIControl.State.normal)
             }
             cell.delegate = self
             cell.indexP = indexPath.row
@@ -100,8 +95,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     func changebutton(checked: Bool, section: Int?, index: Int?) {
         switch(section){
-        case 0: tasks[index!].checked = checked
-        default : tasks2[index!].checked = checked
+        case 0: do { self.tasks[index!].checked = checked
+            tasks2.append(Task(name2: tasks[index!].name))
+            self.tasks.remove(at: index!)
+            }
+        default : do { self.tasks2[index!].checked = checked
+            tasks.append(Task(name2: tasks2[index!].name))
+            self.tasks2.remove(at: index!)
+            }
                     }
         tableView.reloadData()
         
