@@ -8,29 +8,25 @@
 
 import UIKit
 protocol ChangeButton {
-    func changebutton(checked: Bool, index: Int?)
+    func changebutton(checked: Bool, section: Int?, index: Int?)
 }
 class TaskCell: UITableViewCell {
     var delegate: ChangeButton?
     var indexP: Int?
+    var section: Int?
     var tasks: [Task]?
-    var tasks2: [Task]?
+    
     @IBOutlet weak var checkBox: UIButton!
     @IBOutlet weak var taskNameLabel: UILabel!
     @IBAction func checkBoxAction(_ sender: Any) {
             if tasks![indexP!].checked {
-            delegate?.changebutton(checked: false, index: indexP!)
+                delegate?.changebutton(checked: false, section: section!, index: indexP!)
           } else {
-            delegate?.changebutton(checked: true, index: indexP!)
+                delegate?.changebutton(checked: true, section: section!, index: indexP!)
         }
-        if tasks2 != nil {
-            if tasks2![indexP!].checked {
-            delegate?.changebutton(checked: false, index: indexP!)
-            } else {
-            delegate?.changebutton(checked: true, index: indexP!)
-        }
+        
      }
     }
     
-}
+
 

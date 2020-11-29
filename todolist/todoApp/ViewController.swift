@@ -55,6 +55,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         cell.delegate = self
         cell.indexP = indexPath.row
+        cell.section = indexPath.section
         cell.tasks = tasks
         return cell
         }else{
@@ -66,6 +67,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             }
             cell.delegate = self
             cell.indexP = indexPath.row
+            cell.section = indexPath.section
             cell.tasks = tasks2
             return cell
         }
@@ -96,12 +98,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         tasks.append(Task(name2: name))
         tableView.reloadData()
     }
-    func changebutton(checked: Bool, index: Int?) {
-        tasks[index!].checked = checked
-        tasks[index!].checked = checked
+    func changebutton(checked: Bool, section: Int?, index: Int?) {
+        switch(section){
+        case 0: tasks[index!].checked = checked
+        default : tasks2[index!].checked = checked
+                    }
         tableView.reloadData()
+        
     }
-    
 }
 
 class Task {
